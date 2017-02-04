@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2016 PrestaShop
+* 2017 ThirtyBees
 *
 * NOTICE OF LICENSE
 *
@@ -10,18 +10,18 @@
 * http://opensource.org/licenses/afl-3.0.php
 * If you did not receive a copy of the license and are unable to
 * obtain it through the world-wide-web, please send an email
-* to license@prestashop.com so we can send you a copy immediately.
+* to license@ThirtyBees.com so we can send you a copy immediately.
 *
 * DISCLAIMER
 *
-* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
-* versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
+* Do not edit or add to this file if you wish to upgrade ThirtyBees to newer
+* versions in the future. If you wish to customize ThirtyBees for your
+* needs please refer to http://www.ThirtyBees.com for more information.
 *
-*  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2016 PrestaShop SA
+*  @author ThirtyBees <contact@ThirtyBees.com>
+*  @copyright  2017 ThirtyBees SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
+*  International Registered Trademark & Property of ThirtyBees SA
 */
 
 if (!defined('_PS_VERSION_'))
@@ -45,8 +45,8 @@ class BlockAdvertising extends Module
 	{
 		$this->name = 'blockadvertising';
 		$this->tab = 'advertising_marketing';
-		$this->version = '0.10.1';
-		$this->author = 'PrestaShop';
+		$this->version = '0.1';
+		$this->author = 'ThirtyBees';
 		$this->need_instance = 0;
 
 		$this->bootstrap = true;
@@ -54,7 +54,7 @@ class BlockAdvertising extends Module
 
 		$this->displayName = $this->l('Advertising block');
 		$this->description = $this->l('Adds an advertisement block to selected sections of your e-commerce website.');
-		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6.99.99');
+		$this->ps_versions_compliancy = array('min' => '1.0.0', 'max' => '1.0.0');
 
 		$this->initialize();
 	}
@@ -64,7 +64,7 @@ class BlockAdvertising extends Module
 	 */
 	protected function initialize()
 	{
-		$this->adv_imgname = 'advertising';
+		$this->adv_imgname = 'avt';
 		if ((Shop::getContext() == Shop::CONTEXT_GROUP || Shop::getContext() == Shop::CONTEXT_SHOP)
 			&& file_exists(_PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'-g'.$this->context->shop->getContextShopGroupID().'.'.Configuration::get('BLOCKADVERT_IMG_EXT'))
 		)
@@ -75,7 +75,7 @@ class BlockAdvertising extends Module
 			$this->adv_imgname .= '-s'.$this->context->shop->getContextShopID();
 
 		// If none of them available go default
-		if ($this->adv_imgname == 'advertising')
+		if ($this->adv_imgname == 'avt')
 			$this->adv_img = Tools::getMediaServer($this->name)._MODULE_DIR_.$this->name.'/img/fixtures/'.$this->adv_imgname.'.jpg';
 		else
 			$this->adv_img = Tools::getMediaServer($this->name)._MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT');
@@ -101,11 +101,11 @@ class BlockAdvertising extends Module
 			return false;
 		}
 
-		Configuration::updateGlobalValue('BLOCKADVERT_LINK', 'http://www.prestashop.com/');
-		Configuration::updateGlobalValue('BLOCKADVERT_TITLE', 'PrestaShop');
+		Configuration::updateGlobalValue('BLOCKADVERT_LINK', 'http://www.thirtybees.com/');
+		Configuration::updateGlobalValue('BLOCKADVERT_TITLE', 'ThirtyBees');
 		// Try to update with the extension of the image that exists in the module directory
 		foreach (scandir(_PS_MODULE_DIR_.$this->name) as $file)
-			if (in_array($file, array('advertising.jpg', 'advertising.gif', 'advertising.png')))
+			if (in_array($file, array('avt.jpg', 'avt.gif', 'avt.png')))
 				Configuration::updateGlobalValue('BLOCKADVERT_IMG_EXT', substr($file, strrpos($file, '.') + 1));
 
 		return true;
@@ -128,7 +128,7 @@ class BlockAdvertising extends Module
 	private function _deleteCurrentImg()
 	{
 		// Delete the image file
-		if ($this->adv_imgname != 'advertising' && file_exists(_PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT')))
+		if ($this->adv_imgname != 'avt' && file_exists(_PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT')))
 			unlink(_PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT'));
 
 		// Update the extension to the global value or the shop group value if available
@@ -156,11 +156,11 @@ class BlockAdvertising extends Module
 					Configuration::updateValue('BLOCKADVERT_IMG_EXT', substr($_FILES['adv_img']['name'], strrpos($_FILES['adv_img']['name'], '.') + 1));
 
 					// Set the image name with a name contextual to the shop context
-					$this->adv_imgname = 'advertising';
+					$this->adv_imgname = 'avt';
 					if (Shop::getContext() == Shop::CONTEXT_GROUP)
-						$this->adv_imgname = 'advertising-g'.(int)$this->context->shop->getContextShopGroupID();
+						$this->adv_imgname = 'avt-g'.(int)$this->context->shop->getContextShopGroupID();
 					elseif (Shop::getContext() == Shop::CONTEXT_SHOP)
-						$this->adv_imgname = 'advertising-s'.(int)$this->context->shop->getContextShopID();
+						$this->adv_imgname = 'avt-s'.(int)$this->context->shop->getContextShopID();
 
 					// Copy the image in the module directory with its new name
 					if (!move_uploaded_file($_FILES['adv_img']['tmp_name'], _PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT')))
