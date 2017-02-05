@@ -25,6 +25,6 @@
 
 <!-- MODULE Block advertising -->
 <div class="block">
-	<a href="{$adv_link}" title="{$adv_title}"><img src="{$image}" alt="{$adv_title}" title="{$adv_title}" width="155"  height="163" /></a>
+	<a href="{$adv_link|escape:'htmlall':'UTF-8'}" title="{$adv_title|escape:'htmlall':'UTF-8'}"><img src="{$image|escape:'htmlall':'UTF-8'}" alt="{$adv_title|escape:'htmlall':'UTF-8'}" title="{$adv_title|escape:'htmlall':'UTF-8'}" width="155"  height="163" /></a>
 </div>
 <!-- /MODULE Block advertising -->
