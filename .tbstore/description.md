@@ -1,0 +1,1 @@
+The block advertising module enables you to have a static image block in either the left or right column of your site. The module is great for displaying special offers or other advertisements.
