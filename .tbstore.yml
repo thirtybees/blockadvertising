@@ -6,7 +6,7 @@ tags:
   - advertising
   - banner
   - images
-short_description: The block advertising module from thirty bees allows you to create a static advertisement image in either the right or left column of your site.
+description_short: The block advertising module from thirty bees allows you to create a static advertisement image in either the right or left column of your site.
 description: description.md
 images:
   - image-1.png
