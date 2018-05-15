@@ -10,4 +10,5 @@ description_short: The block advertising module from thirty bees allows you to c
 description: description.md
 images:
   - image-1.png
+gdpr_compliant: true
 license: MIT
