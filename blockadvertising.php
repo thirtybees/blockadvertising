@@ -75,7 +75,7 @@ class BlockAdvertising extends Module
 
         $this->displayName = $this->l('Advertising block');
         $this->description = $this->l('Adds an advertisement block to selected sections of your e-commerce website.');
-        $this->ps_versions_compliancy = array('min' => '1.0.0', 'max' => '1.0.0');
+        $this->ps_versions_compliancy = ['min' => '1.6', 'max' => _PS_VERSION_];
 
         $this->initialize();
     }
