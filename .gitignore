@@ -1,0 +1,5 @@
+/translations/*
+!/translations/index.php
+/img/*
+/config*.xml
+*.zip
