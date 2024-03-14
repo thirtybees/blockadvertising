@@ -133,11 +133,11 @@ class BlockAdvertising extends Module
             return false;
         }
 
-        Configuration::updateGlobalValue('BLOCKADVERT_LINK', 'http://www.thirtybees.com/');
+        Configuration::updateGlobalValue('BLOCKADVERT_LINK', 'https://www.thirtybees.com/');
         Configuration::updateGlobalValue('BLOCKADVERT_TITLE', 'ThirtyBees');
         // Try to update with the extension of the image that exists in the module directory
         foreach (scandir(_PS_MODULE_DIR_.$this->name) as $file) {
-            if (in_array($file, array('avt.jpg', 'avt.gif', 'avt.png'))) {
+            if (in_array($file, ['avt.jpg', 'avt.gif', 'avt.png'])) {
                 Configuration::updateGlobalValue('BLOCKADVERT_IMG_EXT', substr($file, strrpos($file, '.') + 1));
             }
         }
@@ -266,37 +266,37 @@ class BlockAdvertising extends Module
      */
     public function renderForm()
     {
-        $formFields = array(
-            'form' => array(
-                'legend' => array(
+        $formFields = [
+            'form' => [
+                'legend' => [
                     'title' => $this->l('Configuration'),
                     'icon'  => 'icon-cogs',
-                ),
-                'input'  => array(
-                    array(
+                ],
+                'input'  => [
+                    [
                         'type'  => 'file',
                         'label' => $this->l('Image for the advertisement'),
                         'name'  => 'adv_img',
                         'desc'  => $this->l('By default the image will appear in the left column. The recommended dimensions are 155 x 163px.'),
                         'thumb' => $this->context->link->protocol_content.$this->adv_img,
-                    ),
-                    array(
+                    ],
+                    [
                         'type'  => 'text',
                         'label' => $this->l('Target link for the image'),
                         'name'  => 'adv_link',
-                    ),
-                    array(
+                    ],
+                    [
                         'type'  => 'text',
                         'label' => $this->l('Title of the target link'),
                         'name'  => 'adv_title',
                         'desc'  => $this->l('This title will be displayed when you mouse over the advertisement block in your shop.'),
-                    ),
-                ),
-                'submit' => array(
+                    ],
+                ],
+                'submit' => [
                     'title' => $this->l('Save'),
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         /** @var AdminController $controller */
         $controller = $this->context->controller;
@@ -311,13 +311,13 @@ class BlockAdvertising extends Module
         $helper->submit_action = 'submitAdvConf';
         $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
-        $helper->tpl_vars = array(
+        $helper->tpl_vars = [
             'fields_value' => $this->getConfigFieldsValues(),
             'languages'    => $controller->getLanguages(),
             'id_language'  => $this->context->language->id,
-        );
+        ];
 
-        return $helper->generateForm(array($formFields));
+        return $helper->generateForm([$formFields]);
     }
 
     /**
@@ -328,10 +328,10 @@ class BlockAdvertising extends Module
      */
     public function getConfigFieldsValues()
     {
-        return array(
+        return [
             'adv_link'  => Tools::getValue('adv_link', Configuration::get('BLOCKADVERT_LINK')),
             'adv_title' => Tools::getValue('adv_title', Configuration::get('BLOCKADVERT_TITLE')),
-        );
+        ];
     }
 
     /**
@@ -358,13 +358,11 @@ class BlockAdvertising extends Module
     public function hookRightColumn($params)
     {
         if (!$this->isCached('blockadvertising.tpl', $this->getCacheId())) {
-            $this->smarty->assign(
-                array(
-                    'image'     => $this->context->link->protocol_content.$this->adv_img,
-                    'adv_link'  => $this->adv_link,
-                    'adv_title' => $this->adv_title,
-                )
-            );
+            $this->smarty->assign([
+                'image'     => $this->context->link->protocol_content.$this->adv_img,
+                'adv_link'  => $this->adv_link,
+                'adv_title' => $this->adv_title,
+            ]);
         }
 
         return $this->display(__FILE__, 'blockadvertising.tpl', $this->getCacheId());
