@@ -226,7 +226,7 @@ class BlockAdvertising extends Module
 
             // Reset the module properties
             $this->initialize();
-            $this->clearCache('blockadvertising.tpl');
+            $this->_clearCache('blockadvertising.tpl');
 
             if (!$errors) {
                 Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules').'&conf=6');
