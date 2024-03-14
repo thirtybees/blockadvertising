@@ -66,7 +66,7 @@ class BlockAdvertising extends Module
     {
         $this->name = 'blockadvertising';
         $this->tab = 'advertising_marketing';
-        $this->version = '0.1';
+        $this->version = '1.0.0';
         $this->author = 'thirty bees';
         $this->need_instance = 0;
 
