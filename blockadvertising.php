@@ -29,32 +29,38 @@ if (!defined('_TB_VERSION_')) {
 
 /**
  * Class BlockAdvertising
- *
- * @since 1.0.0
  */
 class BlockAdvertising extends Module
 {
-    // @codingStandardsIgnoreStart
-    /* Title associated to the image */
+    /**
+     * @var string Title associated to the image
+     */
     public $adv_title;
 
-    /* Link associated to the image */
+    /**
+     * @var string Link associated to the image
+     */
     public $adv_link;
 
-    /* Name of the image without extension */
+    /**
+     * @var string Name of the image without extension
+     */
     public $adv_imgname;
 
-    /* Image path with extension */
+    /**
+     * @var string Image path with extension
+     */
     public $adv_img;
 
-    /** @var array $errors */
+    /**
+     * @var array
+     */
     protected $errors;
-    // @codingStandardsIgnoreEnd
 
     /**
      * BlockAdvertising constructor.
      *
-     * @since 1.0.0
+     * @throws PrestaShopException
      */
     public function __construct()
     {
@@ -76,6 +82,8 @@ class BlockAdvertising extends Module
 
     /**
      * Set the properties of the module, like the link to the image and the title (contextual to the current shop context)
+     *
+     * @throws PrestaShopException
      */
     protected function initialize()
     {
@@ -105,6 +113,7 @@ class BlockAdvertising extends Module
      * Install the module
      *
      * @return bool Indicates whether the module was successfully installed
+     * @throws PrestaShopException
      */
     public function install()
     {
@@ -141,6 +150,7 @@ class BlockAdvertising extends Module
      *
      * @return bool Indicates whether the module has been successfull uninstalled
      *
+     * @throws PrestaShopException
      * @since 1.0.0
      */
     public function uninstall()
@@ -157,6 +167,8 @@ class BlockAdvertising extends Module
      *
      * @return string content
      *
+     * @throws PrestaShopException
+     * @throws SmartyException
      * @since 1.0.0
      */
     public function getContent()
@@ -167,7 +179,7 @@ class BlockAdvertising extends Module
     }
 
     /**
-     * @since 1.0.0
+     * @throws PrestaShopException
      */
     public function postProcess()
     {
@@ -229,7 +241,7 @@ class BlockAdvertising extends Module
      *
      * @return void
      *
-     * @since 1.0.0
+     * @throws PrestaShopException
      */
     private function deleteCurrentImage()
     {
@@ -249,7 +261,8 @@ class BlockAdvertising extends Module
     /**
      * @return string
      *
-     * @since 1.0.0
+     * @throws PrestaShopException
+     * @throws SmartyException
      */
     public function renderForm()
     {
@@ -308,6 +321,7 @@ class BlockAdvertising extends Module
     /**
      * @return array
      *
+     * @throws PrestaShopException
      * @since 1.0.0
      */
     public function getConfigFieldsValues()
@@ -323,7 +337,8 @@ class BlockAdvertising extends Module
      *
      * @return string
      *
-     * @since 1.0.0
+     * @throws PrestaShopException
+     * @throws SmartyException
      */
     public function hookLeftColumn($params)
     {
@@ -335,7 +350,8 @@ class BlockAdvertising extends Module
      *
      * @return string
      *
-     * @since 1.0.0
+     * @throws PrestaShopException
+     * @throws SmartyException
      */
     public function hookRightColumn($params)
     {
