@@ -189,7 +189,7 @@ class BlockAdvertising extends Module
 
         $errors = '';
         if (Tools::isSubmit('submitAdvConf')) {
-            if (isset($_FILES['adv_img']) && isset($_FILES['adv_img']['tmp_name']) && !empty($_FILES['adv_img']['tmp_name'])) {
+            if (isset($_FILES['adv_img']) && !empty($_FILES['adv_img']['tmp_name'])) {
                 if ($error = ImageManager::validateUpload($_FILES['adv_img'], Tools::convertBytes(ini_get('upload_max_filesize')))) {
                     $errors .= $error;
                 } else {
@@ -298,6 +298,9 @@ class BlockAdvertising extends Module
             ),
         );
 
+        /** @var AdminController $controller */
+        $controller = $this->context->controller;
+
         $helper = new HelperForm();
         $helper->show_toolbar = false;
         $helper->table = $this->table;
@@ -310,7 +313,7 @@ class BlockAdvertising extends Module
         $helper->token = Tools::getAdminTokenLite('AdminModules');
         $helper->tpl_vars = array(
             'fields_value' => $this->getConfigFieldsValues(),
-            'languages'    => $this->context->controller->getLanguages(),
+            'languages'    => $controller->getLanguages(),
             'id_language'  => $this->context->language->id,
         );
 
